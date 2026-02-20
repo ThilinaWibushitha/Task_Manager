@@ -79,20 +79,20 @@ export default function AdminDashboard({ user }) {
         <div className="max-w-7xl mx-auto animate-in fade-in duration-500 pb-10">
             <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Admin Portal</h1>
-                    <p className="text-slate-400">System Overview & Analytics</p>
+                    <h1 className="text-3xl font-bold text-white mb-2 neon-text">Admin Portal</h1>
+                    <p className="text-slate-400 font-light">System Overview & Analytics</p>
                 </div>
                 <div className="flex gap-3">
                     <button
                         onClick={() => setShowAddEmp(true)}
-                        className="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium shadow-lg shadow-cyan-900/20"
+                        className="btn-primary px-4 py-2 flex items-center gap-2"
                     >
                         <UserPlus className="w-4 h-4" />
                         Add Employee
                     </button>
                     <button
                         onClick={loadData}
-                        className="bg-navy-800 border border-white/10 text-slate-300 hover:bg-navy-700 px-4 py-2 rounded-lg text-sm font-medium"
+                        className="bg-navy-900/50 border border-white/10 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/30 px-4 py-2 rounded-xl text-sm font-medium transition-all"
                     >
                         Refresh Data
                     </button>
@@ -104,10 +104,10 @@ export default function AdminDashboard({ user }) {
             <PerformanceChart stats={stats} />
 
             <div className="mb-8">
-                <div className="bg-navy-900 rounded-lg p-1 shadow-sm border border-white/10 w-fit mb-4">
+                <div className="bg-navy-900/50 rounded-xl p-1.5 shadow-sm border border-white/5 w-fit mb-4">
                     <button
                         onClick={() => setShowTaskForm(!showTaskForm)}
-                        className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${showTaskForm ? 'bg-cyan-500/20 text-cyan-400' : 'text-slate-400 hover:text-slate-200'
+                        className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${showTaskForm ? 'bg-cyan-500/20 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : 'text-slate-500 hover:text-slate-300'
                             }`}
                     >
                         {showTaskForm ? 'Hide Task Form' : 'Submit Admin Task'}
@@ -115,7 +115,7 @@ export default function AdminDashboard({ user }) {
                 </div>
 
                 {showTaskForm && (
-                    <div className="max-w-2xl">
+                    <div className="max-w-2xl animate-in slide-in-from-top-2 duration-300">
                         <TaskForm
                             onSubmit={async (data) => {
                                 await api.addTask(data);
@@ -131,14 +131,14 @@ export default function AdminDashboard({ user }) {
             </div>
 
             <div className="glass-card">
-                <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-lg font-semibold text-slate-200">Audit Log & Tasks</h2>
-                    <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400" />
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <h2 className="text-xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Audit Log & Tasks</h2>
+                    <div className="relative w-full sm:w-64">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-500/60" />
                         <input
                             type="text"
-                            placeholder="Search employee, project..."
-                            className="pl-10 pr-4 py-2 rounded-lg border border-white/10 bg-navy-900 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/20 w-64 placeholder:text-slate-500"
+                            placeholder="Search records..."
+                            className="input-field pl-10 w-full"
                             value={filterQuery}
                             onChange={(e) => setFilterQuery(e.target.value)}
                         />

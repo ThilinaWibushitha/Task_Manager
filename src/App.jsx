@@ -26,11 +26,25 @@ export default function App() {
   const handleLogin = (userData) => {
     setUser(userData);
     localStorage.setItem('taskAppUser', JSON.stringify(userData));
+
+    // Request full screen for "headless" experience
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(err => {
+        console.warn(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+    }
   };
 
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem('taskAppUser');
+
+    // Exit full screen on logout
+    if (document.fullscreenElement && document.exitFullscreen) {
+      document.exitFullscreen().catch(err => {
+        console.warn(`Error attempting to exit fullscreen: ${err.message}`);
+      });
+    }
   };
 
   if (loading) return <div className="min-h-screen flex items-center justify-center text-teal-600">Loading...</div>;

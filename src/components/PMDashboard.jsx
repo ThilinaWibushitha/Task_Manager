@@ -71,30 +71,30 @@ export default function PMDashboard({ user }) {
         <div className="max-w-7xl mx-auto animate-in fade-in duration-500">
             <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Project Manager Dashboard</h1>
-                    <p className="text-slate-400">Overview and Approvals</p>
+                    <h1 className="text-3xl font-bold text-white mb-2 neon-text">Project Manager</h1>
+                    <p className="text-slate-400 font-light">Team Performance & Approvals</p>
                 </div>
-                <div className="flex bg-navy-900 rounded-lg p-1 shadow-sm border border-white/10">
+                <div className="flex bg-navy-900/50 rounded-xl p-1.5 shadow-sm border border-white/5">
                     <button
                         onClick={() => setActiveTab('overview')}
-                        className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === 'overview' ? 'bg-cyan-500/20 text-cyan-400' : 'text-slate-400 hover:text-slate-200'
+                        className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${activeTab === 'overview' ? 'bg-cyan-500/20 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : 'text-slate-500 hover:text-slate-300'
                             }`}
                     >
                         Overview
                     </button>
                     <button
                         onClick={() => setActiveTab('my-tasks')}
-                        className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === 'my-tasks' ? 'bg-cyan-500/20 text-cyan-400' : 'text-slate-400 hover:text-slate-200'
+                        className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${activeTab === 'my-tasks' ? 'bg-cyan-500/20 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : 'text-slate-500 hover:text-slate-300'
                             }`}
                     >
                         My Tasks
                     </button>
                     <button
                         onClick={() => setActiveTab('new-task')}
-                        className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === 'new-task' ? 'bg-cyan-500/20 text-cyan-400' : 'text-slate-400 hover:text-slate-200'
+                        className={`px-4 py-2 text-sm font-bold rounded-lg transition-all ${activeTab === 'new-task' ? 'bg-cyan-500/20 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : 'text-slate-500 hover:text-slate-300'
                             }`}
                     >
-                        New Task
+                        Create Report
                     </button>
                 </div>
             </header>
@@ -102,21 +102,21 @@ export default function PMDashboard({ user }) {
             <StatsCards stats={stats} />
 
             {activeTab === 'new-task' ? (
-                <div className="max-w-2xl mx-auto">
+                <div className="max-w-2xl mx-auto animate-in slide-in-from-bottom-4 duration-500">
                     <TaskForm onSubmit={handleAddTask} empId={user.id} userName={user.name} isPM={true} />
                 </div>
             ) : (
                 <div className="glass-card">
-                    <div className="flex justify-between items-center mb-6">
-                        <h2 className="text-lg font-semibold text-white">
-                            {activeTab === 'my-tasks' ? 'My Task History' : 'Team Tasks'}
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                        <h2 className="text-xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                            {activeTab === 'my-tasks' ? 'My Activity History' : 'Team Activity Log'}
                         </h2>
-                        <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-400" />
+                        <div className="relative w-full sm:w-64">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-500/60" />
                             <input
                                 type="text"
-                                placeholder="Search by name or project..."
-                                className="pl-10 pr-4 py-2 rounded-lg border border-white/10 bg-navy-900 text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/20 w-64 placeholder:text-slate-500"
+                                placeholder="Search tasks..."
+                                className="input-field pl-10 w-full"
                                 value={filterQuery}
                                 onChange={(e) => setFilterQuery(e.target.value)}
                             />

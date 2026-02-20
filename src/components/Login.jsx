@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LogIn, Loader2, ShieldCheck } from 'lucide-react';
+import { LogIn, Loader2, ShieldCheck, UserPlus } from 'lucide-react';
 import { api } from '../api/googleSheet';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -37,59 +37,71 @@ export default function Login({ onLogin }) {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-navy-950 p-4 relative overflow-hidden">
+            {/* Dynamic Background Elements */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-500/10 rounded-full blur-[100px]"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[100px]"></div>
+                <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse"></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,0.8)_100%)]"></div>
             </div>
-            <div className="glass-card max-w-md w-full text-center animate-in fade-in slide-in-from-bottom-4 duration-700 relative z-10">
-                <div className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-cyan-500/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-12 h-12">
-                        <rect x="16" y="14" width="32" height="40" rx="4" fill="white" opacity="0.95" />
-                        <rect x="24" y="10" width="16" height="8" rx="3" fill="white" />
-                        <rect x="27" y="12" width="10" height="4" rx="2" fill="#0d9488" />
-                        <rect x="22" y="26" width="14" height="3" rx="1.5" fill="#e2e8f0" />
-                        <path d="M36 25l3 3 5-5" stroke="#10b981" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                        <rect x="22" y="34" width="14" height="3" rx="1.5" fill="#e2e8f0" />
-                        <path d="M36 33l3 3 5-5" stroke="#10b981" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                        <rect x="22" y="42" width="14" height="3" rx="1.5" fill="#e2e8f0" />
-                        <circle cx="40" cy="43.5" r="3" fill="#f59e0b" opacity="0.7" />
-                    </svg>
+
+            <div className="glass-card max-w-md w-full text-center p-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 relative z-10 border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.3)]">
+                <div className="w-24 h-24 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(6,182,212,0.3)] rotate-3 hover:rotate-0 transition-transform duration-500 group">
+                    <ShieldCheck className="w-12 h-12 text-white group-hover:scale-110 transition-transform" />
                 </div>
 
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-1 font-display">Daily Task Manager</h1>
-                <p className="text-slate-400 mb-8">Sign in to access your dashboard</p>
+                <h1 className="text-4xl font-black text-white mb-2 font-display tracking-tight leading-tight uppercase">
+                    Daily <br />
+                    <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Task System</span>
+                </h1>
+                <p className="text-slate-500 font-light mb-10 tracking-widest uppercase text-xs">Aesthetics & Performance</p>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        className="input-field"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        disabled={loading}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        className="input-field"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        disabled={loading}
-                        required
-                    />
+                <form onSubmit={handleSubmit} className="space-y-5 text-left">
+                    <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Email</label>
+                        <input
+                            type="email"
+                            placeholder="Employee Email"
+                            className="input-field py-3"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            disabled={loading}
+                            required
+                        />
+                    </div>
+                    <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Password</label>
+                        <input
+                            type="password"
+                            placeholder="Security Key"
+                            className="input-field py-3"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            disabled={loading}
+                            required
+                        />
+                    </div>
 
-                    {error && <p className="text-red-400 text-sm bg-red-500/10 p-2 rounded border border-red-500/20">{error}</p>}
+                    {error && (
+                        <div className="text-rose-400 text-xs bg-rose-500/10 p-3 rounded-xl border border-rose-500/20 animate-in shake duration-300">
+                            {error}
+                        </div>
+                    )}
 
-                    <button type="submit" className="btn-primary flex items-center justify-center gap-2" disabled={loading}>
-                        {loading ? <Loader2 className="animate-spin w-5 h-5" /> : 'Sign In'}
+                    <button type="submit" className="btn-primary w-full py-4 flex items-center justify-center gap-2 group relative overflow-hidden" disabled={loading}>
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                        {loading ? <Loader2 className="animate-spin w-5 h-5" /> : (
+                            <>
+                                <span className="font-bold tracking-widest uppercase text-sm">Login</span>
+                                <LogIn className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </>
+                        )}
                     </button>
                 </form>
 
-                <div className="mt-6 text-center border-t border-white/10 pt-6">
-                    <p className="text-slate-400 text-sm mb-2">Don't have an account?</p>
-                    <Link to="/register" className="text-cyan-400 font-medium hover:text-cyan-300 hover:underline flex items-center justify-center gap-1 transition-colors">
-                        Register New Account
+                <div className="mt-10 text-center border-t border-white/5 pt-8">
+                    <p className="text-slate-500 text-xs mb-3 font-light">Don't have an account?</p>
+                    <Link to="/register" className="text-cyan-400 font-bold hover:text-cyan-300 transition-colors text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+                        Register <UserPlus className="w-4 h-4" />
                     </Link>
                 </div>
             </div>

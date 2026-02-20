@@ -59,8 +59,10 @@ export default function EmployeeDashboard({ user }) {
     return (
         <div className="max-w-7xl mx-auto animate-in fade-in duration-500">
             <header className="mb-8">
-                <h1 className="text-2xl font-bold text-white mb-1">Welcome back, <span className="text-cyan-400">{user.name}</span> 👋</h1>
-                <p className="text-slate-400">Here is your daily activity overview</p>
+                <h1 className="text-3xl font-bold text-white mb-2 neon-text">
+                    Welcome back, <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">{user.name}</span> 👋
+                </h1>
+                <p className="text-slate-400 font-light">Here is your daily activity overview</p>
             </header>
 
             <StatsCards stats={stats} />

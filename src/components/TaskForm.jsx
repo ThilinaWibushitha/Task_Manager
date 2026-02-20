@@ -138,56 +138,56 @@ export default function TaskForm({ onSubmit, empId, userName, isPM, linkedTask }
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-cyan-100 mb-1">Employee Name</label>
+                        <label className="block text-sm font-medium text-slate-400 mb-1">Employee Name</label>
                         <input
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
                             required
-                            className="input-field bg-slate-100"
+                            className="input-field opacity-60 cursor-not-allowed"
                             placeholder="Your Name"
                             readOnly // Auto-filled
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-cyan-100 mb-1">Project</label>
+                        <label className="block text-sm font-medium text-slate-400 mb-1">Project</label>
                         <input name="project" value={formData.project} onChange={handleChange} required className="input-field" placeholder="e.g. Mobile App" />
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-cyan-100 mb-1">Deadline</label>
-                        <input type="date" name="deadline" value={formData.deadline} onChange={handleChange} className="input-field" />
+                        <label className="block text-sm font-medium text-slate-400 mb-1">Deadline</label>
+                        <input type="date" name="deadline" value={formData.deadline} onChange={handleChange} className="input-field [color-scheme:dark]" />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-cyan-100 mb-1">Time Spent</label>
+                        <label className="block text-sm font-medium text-slate-400 mb-1">Time Spent</label>
                         <div className="flex gap-2">
                             <div className="relative flex-1">
                                 <input type="number" min="0" name="hours" value={formData.hours} onChange={handleChange} className="input-field pr-12" placeholder="Hrs" />
-                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 font-medium">hrs</span>
+                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500 font-medium">hrs</span>
                             </div>
                             <div className="relative flex-1">
                                 <input type="number" min="0" max="59" name="minutes" value={formData.minutes} onChange={handleChange} className="input-field pr-12" placeholder="Min" />
-                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 font-medium">min</span>
+                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500 font-medium">min</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-cyan-100 mb-1">Task Name & Description</label>
-                    <textarea name="assigned" value={formData.assigned} onChange={handleChange} className="input-field min-h-[80px]" placeholder="Enter task name and description..." />
+                    <label className="block text-sm font-medium text-slate-400 mb-1">Task Name & Description</label>
+                    <textarea name="assigned" value={formData.assigned} onChange={handleChange} className="input-field min-h-[80px] py-3" placeholder="Enter task name and description..." />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-cyan-100 mb-1">Status</label>
+                        <label className="block text-sm font-medium text-slate-400 mb-1">Status</label>
                         <select
                             name="status"
                             value={formData.status || 'Completed'}
                             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                            className="input-field bg-navy-900"
+                            className="input-field bg-navy-900/50"
                         >
                             <option value="Completed" className="bg-navy-900">Completed</option>
                             <option value="Pending" className="bg-navy-900">Pending</option>
@@ -196,12 +196,12 @@ export default function TaskForm({ onSubmit, empId, userName, isPM, linkedTask }
 
                     {formData.status === 'Pending' && (
                         <div>
-                            <label className="block text-sm font-medium text-cyan-100 mb-1">Reason for Pending</label>
+                            <label className="block text-sm font-medium text-slate-400 mb-1">Reason for Pending</label>
                             <textarea
                                 name="pending"
                                 value={formData.pending}
                                 onChange={handleChange}
-                                className="input-field"
+                                className="input-field min-h-[80px] py-3"
                                 placeholder="Why is this task pending?"
                                 required
                             />

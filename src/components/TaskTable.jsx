@@ -115,85 +115,85 @@ export default function TaskTable({ tasks, allTasks = [], isAdmin, role, onAppro
                                         onClick={() => hasHistory && toggleRow(task.rowIndex)}
                                     >
                                         <td className="p-4 align-top whitespace-nowrap">
-                                            <div className="flex items-center gap-2 text-slate-600">
+                                            <div className="flex items-center gap-2">
                                                 {hasHistory && (
                                                     <div className="text-cyan-400">
                                                         {isExpanded ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                                                     </div>
                                                 )}
-                                                <Calendar className="w-4 h-4 text-cyan-400" />
+                                                <Calendar className="w-4 h-4 text-cyan-500/70" />
                                                 <span className="text-sm font-medium text-slate-200">{task.date && new Date(task.date).toLocaleDateString()}</span>
                                             </div>
                                             {task.deadline && (
-                                                <div className="text-xs text-slate-400 mt-1 ml-6">
+                                                <div className="text-[10px] text-slate-500 mt-1 ml-6 uppercase tracking-wider">
                                                     Due: {new Date(task.deadline).toLocaleDateString()}
                                                 </div>
                                             )}
                                         </td>
                                         <td className="p-4 align-top">
-                                            <span className="bg-cyan-500/10 text-cyan-300 text-xs px-2 py-1 rounded-full font-semibold border border-cyan-500/20">
+                                            <span className="bg-cyan-500/10 text-cyan-300 text-[10px] px-2 py-0.5 rounded-full font-bold border border-cyan-500/20 uppercase tracking-widest">
                                                 {task.project}
                                             </span>
                                         </td>
                                         {showEmployeeColumn && (
                                             <td className="p-4 align-top">
                                                 <div className="flex items-center gap-2">
-                                                    <User className="w-4 h-4 text-slate-400" />
+                                                    <div className="w-8 h-8 rounded-full bg-navy-800 border border-white/10 flex items-center justify-center text-slate-400">
+                                                        <User className="w-4 h-4" />
+                                                    </div>
                                                     <div>
-                                                        <div className="font-medium text-slate-200">{task.name}</div>
-                                                        <div className="text-xs text-slate-500">ID: {task.empId}</div>
+                                                        <div className="font-medium text-slate-200 text-sm">{task.name}</div>
+                                                        <div className="text-[10px] text-slate-500 font-mono">ID: {task.empId}</div>
                                                     </div>
                                                 </div>
                                             </td>
                                         )}
                                         <td className="p-4 align-top">
                                             {task.assigned && task.assigned.startsWith('Continued:') ? (
-                                                <div>
-                                                    <div className="text-xs font-semibold text-cyan-400 mb-1 uppercase tracking-wider flex items-center gap-1">
-                                                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101" />
-                                                        </svg>
+                                                <div className="space-y-2">
+                                                    <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest flex items-center gap-1">
+                                                        <History className="w-3 h-3" />
                                                         Final Task
                                                     </div>
-                                                    <div className="bg-navy-900 border border-white/10 rounded p-2 text-sm text-slate-300">
+                                                    <div className="bg-navy-950/50 border border-white/5 rounded-lg p-2.5 text-sm text-slate-300 font-light leading-relaxed">
                                                         {task.assigned.replace('Continued:', '').trim()}
                                                     </div>
                                                 </div>
                                             ) : (
-                                                <div className="text-sm text-slate-300 whitespace-pre-wrap">{task.assigned}</div>
+                                                <div className="text-sm text-slate-300 whitespace-pre-wrap font-light leading-relaxed">{task.assigned}</div>
                                             )}
                                             {task.completed && (
-                                                <div className="text-sm text-emerald-400 flex items-start gap-1 mt-2">
-                                                    <CheckCircle className="w-3 h-3 mt-1" /> {task.completed}
+                                                <div className="text-[11px] text-emerald-400/80 flex items-start gap-1 mt-2 font-medium">
+                                                    <CheckCircle className="w-3 h-3 mt-0.5" /> {task.completed}
                                                 </div>
                                             )}
                                             {task.pending && (
-                                                <div className="text-sm text-amber-400 flex items-start gap-1 mt-1">
-                                                    <AlertCircle className="w-3 h-3 mt-1" /> {task.pending}
+                                                <div className="text-[11px] text-amber-400/80 flex items-start gap-1 mt-1 font-medium italic">
+                                                    <AlertCircle className="w-3 h-3 mt-0.5" /> {task.pending}
                                                 </div>
                                             )}
                                         </td>
                                         <td className="p-4 align-top whitespace-nowrap">
-                                            <div className="flex flex-col gap-1">
+                                            <div className="flex flex-col gap-2">
                                                 {task.timeSpent && (
-                                                    <div className="flex items-center gap-1 text-xs text-slate-400 bg-white/5 px-2 py-1 rounded inline-block">
+                                                    <div className="flex items-center gap-1.5 text-[11px] text-slate-400 bg-white/5 px-2 py-1 rounded-lg border border-white/5 w-fit">
                                                         <Clock className="w-3 h-3" /> {formatTime(task.timeSpent)}
                                                     </div>
                                                 )}
                                                 {hasHistory && historyTime > 0 && (
-                                                    <div className="flex items-center gap-1 text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded inline-block border border-cyan-500/20">
+                                                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded-lg border border-cyan-500/20 w-fit shadow-[0_0_10px_rgba(6,182,212,0.1)]">
                                                         Total: {formatTime(totalTime)}
                                                     </div>
                                                 )}
                                             </div>
                                         </td>
                                         <td className="p-4 align-top whitespace-nowrap">
-                                            <div className="flex flex-col gap-1">
+                                            <div className="flex flex-col gap-1.5">
                                                 {getStatusBadge(task.signature)}
                                                 {hasHistory && (
-                                                    <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-full border mt-1 ${aggregateStatus === 'Approved'
-                                                        ? 'text-emerald-700 bg-emerald-50 border-emerald-200'
-                                                        : 'text-amber-700 bg-amber-50 border-amber-200'
+                                                    <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/5 uppercase tracking-tighter shadow-sm ${aggregateStatus === 'Approved'
+                                                        ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
+                                                        : 'text-amber-400 bg-amber-500/10 border-amber-500/20'
                                                         }`}>
                                                         {aggregateStatus === 'Approved' ? '✓ All Approved' : '⏳ Chain Pending'}
                                                     </span>
@@ -205,15 +205,15 @@ export default function TaskTable({ tasks, allTasks = [], isAdmin, role, onAppro
                                                 {isPMOrAdmin && task.signature === 'Pending' && onApprove && (
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); onApprove(task); }}
-                                                        className="bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 px-3 py-1.5 rounded-md text-xs font-medium transition-colors border border-cyan-500/30 shadow-[0_0_10px_rgba(6,182,212,0.1)]"
+                                                        className="bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.1)] active:scale-95"
                                                     >
-                                                        ✓ Approve
+                                                        Approve
                                                     </button>
                                                 )}
                                                 {role === 'EMPLOYEE' && task.pending && onApprove && (
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); onApprove(task); }}
-                                                        className="bg-amber-50 text-amber-700 hover:bg-amber-100 px-3 py-1.5 rounded-md text-xs font-medium transition-colors border border-amber-200"
+                                                        className="bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.1)] active:scale-95"
                                                     >
                                                         Continue
                                                     </button>
@@ -221,10 +221,10 @@ export default function TaskTable({ tasks, allTasks = [], isAdmin, role, onAppro
                                                 {isOwner && onDelete && (
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); onDelete(task); }}
-                                                        className="bg-red-50 text-red-500 hover:bg-red-100 px-2 py-1.5 rounded-md text-xs font-medium transition-colors border border-red-200"
+                                                        className="bg-red-500/10 text-red-500 hover:bg-red-500/20 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all border border-red-500/20 active:scale-95"
                                                         title="Delete task"
                                                     >
-                                                        <Trash2 className="w-3.5 h-3.5" />
+                                                        <Trash2 className="w-4 h-4" />
                                                     </button>
                                                 )}
                                             </div>

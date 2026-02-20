@@ -3,12 +3,13 @@ import { CheckCircle, Clock, AlertCircle, FileText } from 'lucide-react';
 
 export default function StatsCards({ stats }) {
     const Card = ({ title, value, icon: Icon, color, bg }) => (
-        <div className="glass-card flex items-center justify-between group hover:border-cyan-500/30 transition-all duration-300">
-            <div>
-                <p className="text-slate-400 text-sm font-medium mb-1">{title}</p>
-                <h3 className="text-3xl font-bold text-white group-hover:text-cyan-400 transition-colors font-display">{value}</h3>
+        <div className="glass-card flex items-center justify-between group hover:border-cyan-500/30 transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-white/5 to-transparent -mr-8 -mt-8 rounded-full blur-2xl group-hover:bg-cyan-500/10 transition-colors"></div>
+            <div className="relative z-10">
+                <p className="text-slate-500 text-[10px] font-bold mb-1 uppercase tracking-widest">{title}</p>
+                <h3 className="text-3xl font-bold text-white group-hover:text-cyan-400 transition-colors font-display tracking-tight">{value}</h3>
             </div>
-            <div className={`p-3 rounded-xl ${bg} ${color} shadow-[0_0_15px_rgba(0,0,0,0.2)]`}>
+            <div className={`relative z-10 p-3 rounded-2xl ${bg} ${color} shadow-lg backdrop-blur-md group-hover:scale-110 transition-transform duration-300`}>
                 <Icon className="w-6 h-6" />
             </div>
         </div>
