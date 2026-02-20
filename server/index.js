@@ -90,9 +90,10 @@ async function notifyHRApproval(taskData, approverName) {
 }
 
 // Routes
+const router = express.Router();
 
 // --- AUTH ---
-app.post('/api/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
         const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
@@ -117,7 +118,7 @@ app.post('/api/login', async (req, res) => {
 });
 
 // --- EMPLOYEES ---
-app.post('/api/employees', async (req, res) => {
+router.post('/employees', async (req, res) => {
     const { id, name, email, password, role, dept } = req.body;
     try {
         // ID is mapped to emp_id
@@ -133,7 +134,7 @@ app.post('/api/employees', async (req, res) => {
 });
 
 // --- TASKS ---
-app.get('/api/tasks', async (req, res) => {
+router.get('/tasks', async (req, res) => {
     const { userId, role } = req.query;
     try {
         let query = 'SELECT * FROM tasks';
@@ -173,7 +174,7 @@ app.get('/api/tasks', async (req, res) => {
     }
 });
 
-app.post('/api/tasks', async (req, res) => {
+router.post('/tasks', async (req, res) => {
     const { empId, name, project, deadline, date, assigned, completed, timeSpent, pending, linkedTaskId } = req.body;
 
     try {
@@ -210,7 +211,7 @@ app.post('/api/tasks', async (req, res) => {
     }
 });
 
-app.post('/api/approve', async (req, res) => {
+router.post('/approve', async (req, res) => {
     const { rowIndex, signature } = req.body; // rowIndex here is the DB ID
     try {
         await db.query(
@@ -232,7 +233,7 @@ app.post('/api/approve', async (req, res) => {
 });
 
 // --- DELETE TASK ---
-app.delete('/api/tasks/:id', async (req, res) => {
+router.delete('/tasks/:id', async (req, res) => {
     const taskId = req.params.id;
     const { empId } = req.body;
     try {
@@ -249,7 +250,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
     }
 });
 
-app.get('/api/stats', async (req, res) => {
+router.get('/stats', async (req, res) => {
     // Basic stats implementation
     res.json({
         totalTasks: 0,
@@ -258,6 +259,9 @@ app.get('/api/stats', async (req, res) => {
         // ... expand as needed
     });
 });
+
+app.use('/api', router);
+app.use('/', router);
 
 
 const PORT = process.env.PORT || 3000;
